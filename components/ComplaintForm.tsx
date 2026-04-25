@@ -53,6 +53,19 @@ export default function ComplaintForm() {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('শুধুমাত্র ছবি ফাইল আপলোড করুন');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+      toast.error('ছবির সাইজ 5MB এর কম হতে হবে');
+      return;
+    }
+
     setUploading(true);
     const formData = new FormData();
     formData.append('file', file);
@@ -66,9 +79,12 @@ export default function ComplaintForm() {
       if (data.success) {
         setImageUrl(data.imageUrl);
         toast.success('ছবি আপলোড হয়েছে');
+      } else {
+        toast.error(data.error || 'আপলোডে সমস্যা হয়েছে');
       }
     } catch (error) {
-      toast.error('আপলোডে সমস্যা হয়েছে');
+      console.error('Upload error:', error);
+      toast.error('আপলোডে সমস্যা হয়েছে, অনুগ্রহ করে আবার চেষ্টা করুন');
     } finally {
       setUploading(false);
     }
@@ -323,12 +339,12 @@ export default function ComplaintForm() {
                     <button
                       type="button"
                       onClick={otpSent ? verifyOTP : sendOTP}
-                      disabled={countdown > 0 && !otpSent || sendingOtp}
-                      className={`bg-gradient-to-r from-primary-500 to-primary-600 text-white px-4 py-3 rounded-xl font-medium hover:from-primary-600 hover:to-primary-700 transition-all whitespace-nowrap ${(countdown > 0 && !otpSent) || sendingOtp ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      disabled={countdown > 0 || sendingOtp}
+                      className={`bg-gradient-to-r from-primary-500 to-primary-600 text-white px-4 py-3 rounded-xl font-medium hover:from-primary-600 hover:to-primary-700 transition-all whitespace-nowrap ${countdown > 0 || sendingOtp ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
                       {sendingOtp ? (
                         'পাঠাচ্ছে...'
-                      ) : countdown > 0 && !otpSent ? (
+                      ) : countdown > 0 ? (
                         <span className="flex items-center gap-2">
                           <Clock size={16} />
                           {Math.floor(countdown / 60)}:{(countdown % 60).toString().padStart(2, '0')}
@@ -452,10 +468,17 @@ export default function ComplaintForm() {
                     {uploading ? 'আপলোড হচ্ছে...' : 'ছবি নির্বাচন করুন'}
                   </label>
                   {imageUrl && (
-                    <span className="text-green-600 text-sm flex items-center gap-1">
-                      <CheckCircle size={14} />
-                      আপলোড হয়েছে
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={imageUrl}
+                        alt="আপলোড করা ছবি"
+                        className="w-16 h-16 object-cover rounded-lg border-2 border-green-500"
+                      />
+                      <span className="text-green-600 text-sm flex items-center gap-1">
+                        <CheckCircle size={14} />
+                        আপলোড হয়েছে
+                      </span>
+                    </div>
                   )}
                 </div>
               </div>
