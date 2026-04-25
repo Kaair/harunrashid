@@ -3,6 +3,8 @@ import connectDB from '@/lib/mongodb';
 import Feedback from '@/models/Feedback';
 import jwt from 'jsonwebtoken';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     const token = request.headers.get('authorization')?.replace('Bearer ', '');

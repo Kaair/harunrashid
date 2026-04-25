@@ -4,6 +4,8 @@ import Volunteer from '@/models/Volunteer';
 import { sendVolunteerConfirmation } from '@/lib/sms';
 import { rateLimit } from '@/lib/rateLimit';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     // Rate limiting by IP address

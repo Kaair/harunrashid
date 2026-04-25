@@ -4,6 +4,8 @@ import Complaint from '@/models/Complaint';
 import jwt from 'jsonwebtoken';
 import { sendComplaintStatusUpdate } from '@/lib/sms';
 
+export const dynamic = 'force-dynamic';
+
 export async function PATCH(request: NextRequest) {
   try {
     await connectDB();

@@ -4,6 +4,8 @@ import Feedback from '@/models/Feedback';
 import connectDB from '@/lib/mongodb';
 import jwt from 'jsonwebtoken';
 
+export const dynamic = 'force-dynamic';
+
 // Middleware to verify admin token
 function verifyAdminToken(request: NextRequest) {
   const authHeader = request.headers.get('authorization');

@@ -4,6 +4,8 @@ import Complaint from '@/models/Complaint';
 import { sendComplaintStatusUpdate } from '@/lib/sms';
 import jwt from 'jsonwebtoken';
 
+export const dynamic = 'force-dynamic';
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } }
