@@ -339,12 +339,12 @@ export default function ComplaintForm() {
                     <button
                       type="button"
                       onClick={otpSent ? verifyOTP : sendOTP}
-                      disabled={countdown > 0 || sendingOtp}
-                      className={`bg-gradient-to-r from-primary-500 to-primary-600 text-white px-4 py-3 rounded-xl font-medium hover:from-primary-600 hover:to-primary-700 transition-all whitespace-nowrap ${countdown > 0 || sendingOtp ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      disabled={(!otpSent && countdown > 0) || sendingOtp}
+                      className={`bg-gradient-to-r from-primary-500 to-primary-600 text-white px-4 py-3 rounded-xl font-medium hover:from-primary-600 hover:to-primary-700 transition-all whitespace-nowrap ${(!otpSent && countdown > 0) || sendingOtp ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
                       {sendingOtp ? (
                         'পাঠাচ্ছে...'
-                      ) : countdown > 0 ? (
+                      ) : !otpSent && countdown > 0 ? (
                         <span className="flex items-center gap-2">
                           <Clock size={16} />
                           {Math.floor(countdown / 60)}:{(countdown % 60).toString().padStart(2, '0')}
