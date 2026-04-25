@@ -29,6 +29,14 @@ export const metadata: Metadata = {
     locale: "bn_BD",
     type: "website",
     siteName: "হারুনুর রশিদ",
+    images: [
+      {
+        url: "/mayor-OG.webp",
+        width: 1200,
+        height: 630,
+        alt: "হারুনুর রশিদ - মানিকগঞ্জ সিটি কর্পোরেশন মেয়র প্রার্থী",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
