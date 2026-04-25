@@ -5,7 +5,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   title: "হারুনুর রশিদ - মানিকগঞ্জ নাগরিক সেবা প্ল্যাটফর্ম",
   description: "মানিকগঞ্জের প্রতিটি নাগরিকের অধিকার ও আধুনিক সুযোগ-সুবিধা নিশ্চিত করাই আমাদের মূল লক্ষ্য। আপনার অভিযোগ আমাদের কাছে আমানত, যার দ্রুত সমাধান আমাদের অঙ্গীকার।",
   keywords: "হারুনুর রশিদ, মানিকগঞ্জ, নাগরিক সেবা, অভিযোগ, সমাধান, মেয়র প্রার্থী, স্বেচ্ছাসেবক, ডিজিটাল সেবা, ট্র্যাকিং",
