@@ -5,7 +5,7 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://harunrashid.vercel.app'),
   title: "হারুনুর রশিদ - মানিকগঞ্জ নাগরিক সেবা প্ল্যাটফর্ম",
   description: "মানিকগঞ্জের প্রতিটি নাগরিকের অধিকার ও আধুনিক সুযোগ-সুবিধা নিশ্চিত করাই আমাদের মূল লক্ষ্য। আপনার অভিযোগ আমাদের কাছে আমানত, যার দ্রুত সমাধান আমাদের অঙ্গীকার।",
   keywords: "হারুনুর রশিদ, মানিকগঞ্জ, নাগরিক সেবা, অভিযোগ, সমাধান, মেয়র প্রার্থী, স্বেচ্ছাসেবক, ডিজিটাল সেবা, ট্র্যাকিং",
@@ -29,9 +29,10 @@ export const metadata: Metadata = {
     locale: "bn_BD",
     type: "website",
     siteName: "হারুনুর রশিদ",
+    url: "https://harunrashid.vercel.app",
     images: [
       {
-        url: "/mayor-OG.webp",
+        url: "https://harunrashid.vercel.app/mayor-OG.webp",
         width: 1200,
         height: 630,
         alt: "হারুনুর রশিদ - মানিকগঞ্জ সিটি কর্পোরেশন মেয়র প্রার্থী",
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "হারুনুর রশিদ - মানিকগঞ্জ নাগরিক সেবা প্ল্যাটফর্ম",
     description: "মানিকগঞ্জের প্রতিটি নাগরিকের অধিকার ও আধুনিক সুযোগ-সুবিধা নিশ্চিত করাই আমাদের মূল লক্ষ্য। আপনার অভিযোগ আমাদের কাছে আমানত, যার দ্রুত সমাধান আমাদের অঙ্গীকার।",
-    images: ["/mayor-OG.webp"],
+    images: ["https://harunrashid.vercel.app/mayor-OG.webp"],
   },
 };
 
