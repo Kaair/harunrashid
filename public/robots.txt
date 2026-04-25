@@ -3,4 +3,7 @@ Allow: /
 Disallow: /admin
 Disallow: /api/admin
 
+User-agent: facebookexternalhit
+Allow: /
+
 Sitemap: https://yourdomain.com/sitemap.xml
