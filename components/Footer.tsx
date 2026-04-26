@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Facebook, Youtube, X } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -21,39 +22,14 @@ export default function Footer() {
               }}
               className="flex items-center gap-2 mb-4 hover:scale-105 transition-transform cursor-pointer"
             >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-8 h-8"
-              >
-                <defs>
-                  <linearGradient id="buildingGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#0A1F44' }} />
-                    <stop offset="50%" style={{ stopColor: '#1e3a5f' }} />
-                    <stop offset="100%" style={{ stopColor: '#0A1F44' }} />
-                  </linearGradient>
-                  <linearGradient id="roofGradFooter" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#D4AF37' }} />
-                    <stop offset="50%" style={{ stopColor: '#FFD700' }} />
-                    <stop offset="100%" style={{ stopColor: '#D4AF37' }} />
-                  </linearGradient>
-                </defs>
-                <rect x="8" y="16" width="16" height="14" fill="url(#buildingGradFooter)" rx="1" />
-                <path d="M6 16 L16 6 L26 16" fill="url(#roofGradFooter)" />
-                <rect x="10" y="18" width="3" height="4" fill="#FFF8DC" rx="0.5" />
-                <rect x="19" y="18" width="3" height="4" fill="#FFF8DC" rx="0.5" />
-                <rect x="10" y="24" width="3" height="4" fill="#FFF8DC" rx="0.5" />
-                <rect x="19" y="24" width="3" height="4" fill="#FFF8DC" rx="0.5" />
-                <rect x="14" y="22" width="4" height="6" fill="#D4AF37" rx="0.5" />
-                <line x1="16" y1="6" x2="16" y2="2" stroke="#0A1F44" strokeWidth="1.5" />
-                <rect x="16" y="2" width="6" height="4" fill="#D4AF37" rx="0.5" />
-              </svg>
-              <span className="text-xl font-extrabold leading-tight text-white">
-                মাওলানা হারুনুর রশিদ রাহমানী
-              </span>
+              <Image
+                src="/logo.png"
+                alt="মাওলানা হারুনুর রশিদ রাহমানী"
+                width={300}
+                height={90}
+                className="h-16 w-auto"
+                priority
+              />
             </a>
             <p className="text-gray-400 mb-4 leading-relaxed">
               আপনার সমস্যা, আমার দায়িত্ব। মানিকগঞ্জের নাগরিকদের জন্য ডিজিটাল সেবা প্ল্যাটফর্ম।

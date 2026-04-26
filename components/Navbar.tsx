@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sparkles, ChevronDown } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,63 +39,14 @@ export default function Navbar() {
               }}
               className="flex items-center gap-2 sm:gap-3 hover:scale-105 transition-transform cursor-pointer"
             >
-              <svg
-                width="40"
-                height="40"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-10 h-10 sm:w-11 sm:h-11 drop-shadow-md"
-              >
-                <defs>
-                  <linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style={{ stopColor: '#FFD700' }} />
-                    <stop offset="50%" style={{ stopColor: '#FFA500' }} />
-                    <stop offset="100%" style={{ stopColor: '#FF8C00' }} />
-                  </linearGradient>
-                  <linearGradient id="rayGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" style={{ stopColor: '#FFD700' }} />
-                    <stop offset="100%" style={{ stopColor: 'rgba(255,215,0,0)' }} />
-                  </linearGradient>
-                </defs>
-                {/* Sun rays */}
-                <g stroke="url(#rayGrad)" strokeWidth="1.5" strokeLinecap="round">
-                  <line x1="16" y1="2" x2="16" y2="5" />
-                  <line x1="16" y1="27" x2="16" y2="30" />
-                  <line x1="2" y1="16" x2="5" y2="16" />
-                  <line x1="27" y1="16" x2="30" y2="16" />
-                  <line x1="5" y1="5" x2="7" y2="7" />
-                  <line x1="25" y1="25" x2="27" y2="27" />
-                  <line x1="25" y1="7" x2="27" y2="5" />
-                  <line x1="5" y1="25" x2="7" y2="27" />
-                </g>
-                {/* Main sun circle */}
-                <circle cx="16" cy="16" r="8" fill="url(#sunGrad)" />
-                {/* Inner glow circle */}
-                <circle cx="16" cy="16" r="5" fill="#FFD700" opacity="0.6" />
-                {/* Inner bright circle */}
-                <circle cx="16" cy="16" r="2.5" fill="#FFF8DC" />
-                {/* Small rays */}
-                <g stroke="#FFD700" strokeWidth="1" opacity="0.5">
-                  <line x1="16" y1="4" x2="16" y2="6" transform="rotate(22.5 16 16)" />
-                  <line x1="16" y1="4" x2="16" y2="6" transform="rotate(45 16 16)" />
-                  <line x1="16" y1="4" x2="16" y2="6" transform="rotate(67.5 16 16)" />
-                  <line x1="16" y1="4" x2="16" y2="6" transform="rotate(112.5 16 16)" />
-                  <line x1="16" y1="4" x2="16" y2="6" transform="rotate(135 16 16)" />
-                  <line x1="16" y1="4" x2="16" y2="6" transform="rotate(157.5 16 16)" />
-                  <line x1="16" y1="4" x2="16" y2="6" transform="rotate(202.5 16 16)" />
-                  <line x1="16" y1="4" x2="16" y2="6" transform="rotate(225 16 16)" />
-                  <line x1="16" y1="4" x2="16" y2="6" transform="rotate(247.5 16 16)" />
-                </g>
-              </svg>
-              <div className="flex flex-col">
-                <span className="text-base sm:text-lg lg:text-xl font-black bg-gradient-to-r from-primary-600 via-purple-600 to-accent-600 bg-clip-text text-transparent leading-tight">
-                  মাওলানা হারুনুর রশিদ রাহমানী
-                </span>
-                <span className="text-[10px] sm:text-xs bg-gradient-to-r from-gray-700 to-gray-500 bg-clip-text text-transparent tracking-wider font-semibold">
-                  মানিকগঞ্জ সিটি
-                </span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="মাওলানা হারুনুর রশিদ রাহমানী"
+                width={300}
+                height={90}
+                className="h-14 sm:h-16 lg:h-20 w-auto"
+                priority
+              />
             </a>
           </motion.div>
 
