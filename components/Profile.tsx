@@ -80,7 +80,7 @@ export default function Profile() {
                 )}
               </div>
               <h3 className="text-2xl font-bold text-gray-900 font-heading mb-1">মাওলানা হারুনুর রশিদ রাহমানী</h3>
-              <p className="text-gray-600 font-body text-sm mb-4">মেয়র পদপ্রার্থী, মানিকগঞ্জ সিটি কর্পোরেশন</p>
+              <p className="text-gray-600 font-body text-sm mb-4">মেয়র পদপ্রার্থী, মানিকগঞ্জ পৌরসভা</p>
               
               {/* Personal Slogan */}
               <div className="mb-3 px-4">
@@ -196,7 +196,7 @@ export default function Profile() {
               {/* Quote */}
               <div className="bg-gradient-to-r from-primary-500 to-accent-500 p-5 rounded-xl text-white">
                 <p className="italic font-body text-sm leading-relaxed">
-                  "একটি দুর্নীতিমুক্ত, আধুনিক ও সেবামূলক ডিজিটাল মানিকগঞ্জ সিটি কর্পোরেশন গড়ে তোলাই আমার মূল লক্ষ্য।"
+                  "একটি দুর্নীতিমুক্ত, আধুনিক ও সেবামূলক ডিজিটাল মানিকগঞ্জ পৌরসভা গড়ে তোলাই আমার মূল লক্ষ্য।"
                 </p>
               </div>
 

@@ -86,7 +86,7 @@ export default function MediaPage() {
             হোম পেজে ফিরে যান
           </Link>
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">কার্যক্রম ও আপডেট</h1>
-          <p className="text-gray-600 text-lg">মানিকগঞ্জ সিটি কর্পোরেশনের সকল কার্যক্রম ও আপডেট</p>
+          <p className="text-gray-600 text-lg">মানিকগঞ্জ পৌরসভার সকল কার্যক্রম ও আপডেট</p>
         </motion.div>
 
         {/* Category Filter */}

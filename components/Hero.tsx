@@ -165,7 +165,7 @@ export default function Hero() {
                   <div className="flex items-center justify-center gap-2 mb-6 text-gray-600">
                     <span className="text-base sm:text-lg lg:text-xl">📍</span>
                     <p className="text-sm sm:text-base lg:text-lg">
-                      মানিকগঞ্জ সিটি কর্পোরেশন
+                      মানিকগঞ্জ পৌরসভা
                     </p>
                   </div>
                   

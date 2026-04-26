@@ -24,33 +24,6 @@ const categoryLabels: { [key: string]: string } = {
   announcement: 'ঘোষণা',
 };
 
-const demoMedia: Media[] = [
-  {
-    _id: 'demo-1',
-    title: 'মানিকগঞ্জ সিটি কর্পোরেশনের নতুন রাস্তা উন্নয়ন কাজ শুরু',
-    description: 'মানিকগঞ্জ সিটি কর্পোরেশনের উদ্যোগে শহরের প্রধান সড়কগুলোর উন্নয়ন কাজ আনুষ্ঠানিকভাবে শুরু হয়েছে। এই প্রকল্পের মাধ্যমে যানজট কমানো এবং নাগরিকদের যাতায়াত সুবিধা বৃদ্ধির লক্ষ্যে কাজ করা হচ্ছে। প্রকল্পটি আগামী ৬ মাসের মধ্যে সম্পন্ন হবে। এতে প্রায় ১৫ কোটি টাকা বরাদ্দ করা হয়েছে। শহরের ১৫টি প্রধান সড়কের উন্নয়ন কাজ চলমান রয়েছে। এই প্রকল্পের অধীনে সড়ক প্রশস্তকরণ, ড্রেনেজ ব্যবস্থা উন্নয়ন এবং স্ট্রিট লাইট স্থাপন করা হবে। স্থানীয় ঠিকাদার এবং শ্রমিকদের নিয়োগ দেওয়া হয়েছে। প্রকল্পটি সম্পন্ন হলে শহরের যানজট অনেকাংশে কমে যাবে এবং নাগরিকদের দৈনন্দিন জীবনে সুবিধা হবে।',
-    imageUrl: 'https://images.unsplash.com/photo-1594297790677-5265e0c5d4b1?w=1200&h=800&fit=crop',
-    category: 'news',
-    createdAt: new Date().toISOString(),
-  },
-  {
-    _id: 'demo-2',
-    title: 'স্বেচ্ছাসেবকদের সম্মাননা অনুষ্ঠান অনুষ্ঠিত',
-    description: 'মানিকগঞ্জ সিটি কর্পোরেশনের উদ্যোগে স্বেচ্ছাসেবকদের সম্মাননা অনুষ্ঠান অনুষ্ঠিত হয়েছে। সমাজের উন্নয়নে অবদান রাখার জন্য ৫০ জন স্বেচ্ছাসেবককে ক্রেস্ট এবং সনদপত্র প্রদান করা হয়। এই স্বেচ্ছাসেবকরা গত এক বছরে বিভিন্ন সামাজিক কাজে সক্রিয়ভাবে অংশগ্রহণ করেছেন। তারা স্বাস্থ্য সেবা ক্যাম্প, শিক্ষা প্রতিষ্ঠানে সাহায্য, দুর্যোগ ব্যবস্থাপনা এবং পরিবেশ সংরক্ষণে কাজ করেছেন। মেযর প্রার্থী এই অনুষ্ঠানে উপস্থিত থেকে স্বেচ্ছাসেবকদের অভিনন্দন জানিয়েছেন। তিনি বলেন, স্বেচ্ছাসেবকরা সমাজের প্রকৃত সম্পদ। তাদের এই অবদান সমাজের উন্নয়নে গুরুত্বপূর্ণ ভূমিকা রাখছে।',
-    imageUrl: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200&h=800&fit=crop',
-    category: 'event',
-    createdAt: new Date(Date.now() - 86400000).toISOString(),
-  },
-  {
-    _id: 'demo-3',
-    title: 'জনস্বাস্থ্য সেবার নতুন উদ্যোগ',
-    description: 'মানিকগঞ্জ সিটি কর্পোরেশন থেকে নাগরিকদের জন্য বিনামূল্যে স্বাস্থ্য সেবা ক্যাম্প আয়োজন করা হয়েছে। এতে বিশেষজ্ঞ চিকিৎসকগণ রোগীদের চিকিৎসা সেবা প্রদান করছেন। আগামী শুক্রবার পর্যন্ত এই ক্যাম্প চলবে। প্রতিদিন গড়ে ২০০ জন রোগীকে সেবা প্রদান করা হচ্ছে। এই ক্যাম্পে সাধারণ চিকিৎসা ছাড়াও ডায়াবেটিস, উচ্চ রক্তচাপ, চোখের সমস্যা এবং দন্ত চিকিৎসার সুবিধা রয়েছে। প্রয়োজনে হাসপাতালে রেফারেন্স দেওয়া হচ্ছে। স্থানীয় ফার্মেসি থেকে বিনামূল্যে ওষুধ প্রদান করা হচ্ছে। এই উদ্যোগের মাধ্যমে স্বাস্থ্য সেবা সকলের কাছে পৌঁছানোর চেষ্টা করা হচ্ছে।',
-    imageUrl: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&h=800&fit=crop',
-    category: 'update',
-    createdAt: new Date(Date.now() - 172800000).toISOString(),
-  },
-];
-
 export default function PostDetailPage() {
   const params = useParams();
   const [post, setPost] = useState<Media | null>(null);
@@ -95,38 +68,12 @@ export default function PostDetailPage() {
             .filter((item: Media) => item._id !== params.id && item.category === found.category)
             .slice(0, 4);
           setRelatedPosts(related);
-        } else {
-          const demoFound = demoMedia.find((item) => item._id === params.id);
-          currentPost = demoFound || null;
-          if (currentPost) {
-            const related = demoMedia
-              .filter((item) => item._id !== params.id && currentPost!.category && item.category === currentPost!.category)
-              .slice(0, 4);
-            setRelatedPosts(related);
-          }
-        }
-      } else {
-        const demoFound = demoMedia.find((item) => item._id === params.id);
-        currentPost = demoFound || null;
-        if (currentPost) {
-          const related = demoMedia
-            .filter((item) => item._id !== params.id && currentPost!.category && item.category === currentPost!.category)
-            .slice(0, 4);
-          setRelatedPosts(related);
         }
       }
       setPost(currentPost);
     } catch (error) {
       console.error('Post fetch error:', error);
-      const demoFound = demoMedia.find((item) => item._id === params.id);
-      const currentPost = demoFound || null;
-      if (currentPost) {
-        const related = demoMedia
-          .filter((item) => item._id !== params.id && item.category === currentPost.category)
-          .slice(0, 4);
-        setRelatedPosts(related);
-      }
-      setPost(currentPost);
+      setPost(null);
     } finally {
       setLoading(false);
     }

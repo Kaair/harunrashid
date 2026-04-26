@@ -35,7 +35,7 @@ export const metadata: Metadata = {
         url: "https://harunrashid.vercel.app/mayor-OG.webp",
         width: 1200,
         height: 630,
-        alt: "হারুনুর রশিদ - মানিকগঞ্জ সিটি কর্পোরেশন মেয়র প্রার্থী",
+        alt: "হারুনুর রশিদ - মানিকগঞ্জ পৌরসভা মেয়র প্রার্থী",
       },
     ],
   },

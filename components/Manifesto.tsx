@@ -82,7 +82,7 @@ export default function Manifesto() {
           <h2 className="text-3xl sm:text-4xl font-bold mb-3" style={{ color: '#0A1F44' }}>
             ইশতেহার
           </h2>
-          <p className="text-gray-600">মানিকগঞ্জ সিটি কর্পোরেশনের উন্নয়ন পরিকল্পনা</p>
+          <p className="text-gray-600">মানিকগঞ্জ পৌরসভার উন্নয়ন পরিকল্পনা</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

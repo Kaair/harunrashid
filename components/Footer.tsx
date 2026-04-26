@@ -123,7 +123,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3 text-gray-400">
                 <MapPin size={18} className="mt-1" />
-                <span>মানিকগঞ্জ সিটি কর্পোরেশন, মানিকগঞ্জ, ঢাকা</span>
+                <span>মানিকগঞ্জ পৌরসভা, মানিকগঞ্জ, ঢাকা</span>
               </li>
             </ul>
           </motion.div>
