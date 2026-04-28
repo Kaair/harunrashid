@@ -13,34 +13,46 @@ cloudinary.config({
 export default cloudinary;
 
 export async function uploadImage(file: File, folder: string = 'media-uploads'): Promise<{ url: string; publicId: string }> {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('upload_preset', process.env.CLOUDINARY_UPLOAD_PRESET || 'ml_default');
-  formData.append('folder', folder);
-  // Enable auto WebP conversion and quality optimization
-  formData.append('fetch_format', 'webp');
-  formData.append('quality', 'auto:good');
-  formData.append('flags', 'progressive');
+  console.log('Cloudinary config check:', {
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    hasApiKey: !!process.env.CLOUDINARY_API_KEY,
+    hasApiSecret: !!process.env.CLOUDINARY_API_SECRET,
+  });
 
   try {
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
+    // Convert File to Buffer for cloudinary SDK
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-    const data = await response.json();
+    console.log('Uploading with signed upload...');
 
-    if (!response.ok) {
-      throw new Error(data.error?.message || 'Upload failed');
-    }
+    // Use Promise wrapper for upload_stream
+    return new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        {
+          folder,
+          resource_type: 'image',
+          transformation: [
+            { fetch_format: 'avif', quality: 'auto:good' },
+            { flags: 'progressive' }
+          ]
+        },
+        (error, result) => {
+          if (error) {
+            console.error('Cloudinary upload error:', error);
+            reject(error);
+          } else {
+            console.log('Cloudinary upload success:', result);
+            resolve({
+              url: result!.secure_url,
+              publicId: result!.public_id,
+            });
+          }
+        }
+      );
 
-    return {
-      url: data.secure_url,
-      publicId: data.public_id,
-    };
+      uploadStream.end(buffer);
+    });
   } catch (error) {
     console.error('Cloudinary upload error:', error);
     throw error;

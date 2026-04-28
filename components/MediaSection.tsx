@@ -18,6 +18,8 @@ export default function MediaSection() {
   const [media, setMedia] = useState<Media[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const stripHtml = (html: string): string => html.replace(/<[^>]*>/g, '');
+
   useEffect(() => {
     fetchMedia();
   }, []);
@@ -110,7 +112,7 @@ export default function MediaSection() {
                     })}
                   </div>
                   <h4 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h4>
-                  <p className="text-gray-600 line-clamp-2">{item.description}</p>
+                  <p className="text-gray-600 line-clamp-2">{stripHtml(item.description)}</p>
                 </motion.div>
               ))}
             </div>

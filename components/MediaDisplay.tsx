@@ -28,6 +28,8 @@ export default function MediaDisplay() {
   const [selectedMedia, setSelectedMedia] = useState<Media | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  const stripHtml = (html: string): string => html.replace(/<[^>]*>/g, '');
+
   useEffect(() => {
     fetchMedia();
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -113,7 +115,7 @@ export default function MediaDisplay() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="absolute bottom-0 left-0 right-0 p-4">
                       <h3 className="text-white font-bold text-lg mb-1">{item.title}</h3>
-                      <p className="text-white/90 text-sm line-clamp-2">{item.description}</p>
+                      <p className="text-white/90 text-sm line-clamp-2">{stripHtml(item.description)}</p>
                     </div>
                   </div>
                   <div className="absolute top-3 right-3">
@@ -182,7 +184,7 @@ export default function MediaDisplay() {
                   </span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">{selectedMedia.title}</h3>
-                <p className="text-gray-700 mb-4">{selectedMedia.description}</p>
+                <p className="text-gray-700 mb-4">{stripHtml(selectedMedia.description)}</p>
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <Calendar size={16} />
                   {new Date(selectedMedia.createdAt).toLocaleDateString('bn-BD', {

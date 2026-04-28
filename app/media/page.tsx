@@ -29,6 +29,8 @@ export default function MediaPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
+  const stripHtml = (html: string): string => html.replace(/<[^>]*>/g, '');
+
   useEffect(() => {
     fetchMedia();
   }, []);
@@ -54,7 +56,7 @@ export default function MediaPage() {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory;
     const matchesSearch = searchQuery === '' || 
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(searchQuery.toLowerCase());
+      stripHtml(item.description).toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
@@ -172,7 +174,7 @@ export default function MediaPage() {
                     </div>
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-1">{item.title}</h3>
-                  <p className="text-gray-600 text-sm line-clamp-3 mb-4">{item.description}</p>
+                  <p className="text-gray-600 text-sm line-clamp-3 mb-4">{stripHtml(item.description)}</p>
                   <Link
                     href={`/media/${item._id}`}
                     className="block w-full bg-primary-600 text-white py-2 rounded-lg hover:bg-primary-700 transition-colors font-medium text-center"

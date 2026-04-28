@@ -31,6 +31,8 @@ export default function PostDetailPage() {
   const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  const stripHtml = (html: string): string => html.replace(/<[^>]*>/g, '');
+
   useEffect(() => {
     fetchPost();
   }, [params.id]);
@@ -160,7 +162,7 @@ export default function PostDetailPage() {
               </div>
               <div className="flex items-center gap-1">
                 <Clock size={16} />
-                {calculateReadingTime(post.description)} মিনিট পঠন
+                {calculateReadingTime(stripHtml(post.description))} মিনিট পঠন
               </div>
             </div>
 
@@ -168,9 +170,10 @@ export default function PostDetailPage() {
               {post.title}
             </h1>
 
-            <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-              <p>{post.description}</p>
-            </div>
+            <div
+              className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: post.description }}
+            />
 
             <div className="mt-8 pt-8 border-t border-gray-200">
               <div className="flex flex-wrap gap-4">
@@ -180,7 +183,7 @@ export default function PostDetailPage() {
                       try {
                         await navigator.share({
                           title: post.title,
-                          text: post.description,
+                          text: stripHtml(post.description),
                           url: window.location.href,
                         });
                       } catch (error) {
@@ -237,7 +240,7 @@ export default function PostDetailPage() {
                       {categoryLabels[item.category] || item.category}
                     </span>
                     <h3 className="font-bold text-gray-900 mb-2 line-clamp-1">{item.title}</h3>
-                    <p className="text-gray-600 text-sm line-clamp-2">{item.description}</p>
+                    <p className="text-gray-600 text-sm line-clamp-2">{stripHtml(item.description)}</p>
                   </div>
                 </Link>
               ))}
