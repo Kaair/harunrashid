@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowLeft, Clock, Share2 } from 'lucide-react';
+import { Calendar, ArrowLeft, ArrowRight, Clock, Share2, Copy, Facebook, MessageCircle, Send } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
@@ -30,6 +30,7 @@ export default function PostDetailPage() {
   const [relatedPosts, setRelatedPosts] = useState<Media[]>([]);
   const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   const stripHtml = (html: string): string => html.replace(/<[^>]*>/g, '');
 
@@ -48,6 +49,7 @@ export default function PostDetailPage() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
 
   const calculateReadingTime = (text: string): number => {
     const wordsPerMinute = 200; // Average reading speed
@@ -133,9 +135,9 @@ export default function PostDetailPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl shadow-xl overflow-hidden"
+          className="bg-white rounded-2xl shadow-xl"
         >
-          <div className="relative w-full h-64 md:h-96 lg:h-[500px]">
+          <div className="relative w-full h-64 md:h-96 lg:h-[500px] overflow-hidden rounded-t-2xl">
             <Image
               src={post.imageUrl}
               alt={post.title}
@@ -166,7 +168,7 @@ export default function PostDetailPage() {
               </div>
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 leading-tight">
               {post.title}
             </h1>
 
@@ -176,40 +178,94 @@ export default function PostDetailPage() {
             />
 
             <div className="mt-8 pt-8 border-t border-gray-200">
-              <div className="flex flex-wrap gap-4">
+              <p className="text-sm font-semibold text-gray-700 mb-3">শেয়ার করুন</p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm"
+                >
+                  <Facebook size={18} />
+                  Facebook
+                </a>
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(post.title + ' ' + window.location.href)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-green-500 text-white text-sm font-medium hover:bg-green-600 transition-colors shadow-sm"
+                >
+                  <MessageCircle size={18} />
+                  WhatsApp
+                </a>
+                <a
+                  href={`https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(post.title)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-sky-500 text-white text-sm font-medium hover:bg-sky-600 transition-colors shadow-sm"
+                >
+                  <Send size={18} />
+                  Telegram
+                </a>
                 <button
                   onClick={async () => {
                     if (navigator.share) {
                       try {
                         await navigator.share({
                           title: post.title,
-                          text: stripHtml(post.description),
+                          text: stripHtml(post.description).slice(0, 200),
                           url: window.location.href,
                         });
-                      } catch (error) {
-                        console.error('Share error:', error);
+                      } catch {
+                        // User cancelled
                       }
-                    } else {
-                      // Fallback: copy to clipboard
-                      navigator.clipboard.writeText(window.location.href);
-                      alert('লিংক কপি হয়েছে!');
                     }
                   }}
-                  className="flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors font-medium"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-gray-700 text-white text-sm font-medium hover:bg-gray-800 transition-colors shadow-sm"
                 >
-                  <Share2 size={20} />
-                  শেয়ার করুন
+                  <Share2 size={18} />
+                  আরও
                 </button>
-                <Link
-                  href="/media"
-                  className="flex items-center gap-2 bg-gray-100 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                <button
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(window.location.href);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    } catch {
+                      const input = document.createElement('input');
+                      input.value = window.location.href;
+                      document.body.appendChild(input);
+                      input.select();
+                      document.execCommand('copy');
+                      document.body.removeChild(input);
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    }
+                  }}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm ${
+                    copied
+                      ? 'bg-green-100 text-green-700 border border-green-300'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
                 >
-                  আরও কার্যক্রম দেখুন
-                </Link>
+                  <Copy size={18} />
+                  {copied ? 'কপি হয়েছে! ✓' : 'লিংক কপি'}
+                </button>
               </div>
             </div>
           </div>
         </motion.article>
+
+        <style>{`
+          .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+          }
+          .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+          }
+        `}</style>
 
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
@@ -219,31 +275,50 @@ export default function PostDetailPage() {
             transition={{ delay: 0.2 }}
             className="mt-12"
           >
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">সম্পর্কিত কার্যক্রম</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">সম্পর্কিত কার্যক্রম</h2>
+            <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide">
               {relatedPosts.map((item, index) => (
                 <Link
                   key={item._id}
                   href={`/media/${item._id}`}
-                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow block"
+                  className="flex-shrink-0 w-[80vw] md:w-auto snap-center group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow block"
                 >
-                  <div className="relative w-full h-40">
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-4">
-                    <span className="bg-primary-100 text-primary-800 px-2 py-1 rounded-full text-xs font-medium mb-2 inline-block">
-                      {categoryLabels[item.category] || item.category}
-                    </span>
-                    <h3 className="font-bold text-gray-900 mb-2 line-clamp-1">{item.title}</h3>
-                    <p className="text-gray-600 text-sm line-clamp-2">{stripHtml(item.description)}</p>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <div className="relative w-full h-40 md:h-48">
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                      <div className="absolute top-3 right-3">
+                        <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-900">
+                          {categoryLabels[item.category] || item.category}
+                        </span>
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent">
+                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                          <h3 className="text-white font-bold text-xs md:text-base mb-0.5 md:mb-1 line-clamp-2 leading-tight">{item.title}</h3>
+                          <p className="text-white/80 text-xs">আর পড়ুন &rarr;</p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
                 </Link>
               ))}
+            </div>
+            <div className="text-center mt-6">
+              <Link
+                href="/media"
+                className="inline-flex items-center gap-2 bg-primary-600 text-white px-6 py-3 rounded-full hover:bg-primary-700 transition-colors font-medium"
+              >
+                আরও কার্যক্রম দেখুন
+                <ArrowRight size={20} />
+              </Link>
             </div>
           </motion.div>
         )}
