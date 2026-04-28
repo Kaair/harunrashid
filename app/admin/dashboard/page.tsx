@@ -30,7 +30,9 @@ import {
   Eye,
   Menu,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  EyeOff,
+  Globe
 } from 'lucide-react';
 
 // Dynamically import ReactQuill to avoid SSR issues
@@ -1858,7 +1860,7 @@ export default function AdminDashboard() {
                           day: 'numeric',
                         })}
                       </div>
-                      <div className="flex gap-2">
+                      <div className="flex gap-2 mb-2">
                         <button
                           onClick={() => {
                             setEditMode(true);
@@ -1882,6 +1884,39 @@ export default function AdminDashboard() {
                           মুছুন
                         </button>
                       </div>
+                      <button
+                        onClick={async () => {
+                          try {
+                            const token = localStorage.getItem('adminToken');
+                            const res = await fetch(`/api/admin/media/${item._id}`, {
+                              method: 'PATCH',
+                              headers: {
+                                Authorization: `Bearer ${token}`,
+                              },
+                            });
+                            const data = await res.json();
+                            if (data.success) {
+                              toast.success(data.media.status === 'published' ? 'প্রকাশিত হয়েছে' : 'খসড়া হয়েছে');
+                              fetchMedia();
+                            } else {
+                              toast.error(data.error || 'স্ট্যাটাস পরিবর্তন করতে সমস্যা হয়েছে');
+                            }
+                          } catch (error) {
+                            toast.error('স্ট্যাটাস পরিবর্তন করতে সমস্যা হয়েছে');
+                          }
+                        }}
+                        className={`w-full py-2 rounded-lg transition-colors flex items-center justify-center gap-1 text-sm font-medium ${
+                          item.status === 'published'
+                            ? 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                            : 'bg-green-100 text-green-700 hover:bg-green-200'
+                        }`}
+                      >
+                        {item.status === 'published' ? (
+                          <><EyeOff size={14} /> খসড়া করুন</>
+                        ) : (
+                          <><Globe size={14} /> প্রকাশ করুন</>
+                        )}
+                      </button>
                     </div>
                   </div>
                 ))}

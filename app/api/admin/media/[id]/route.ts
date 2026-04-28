@@ -63,6 +63,35 @@ export async function PUT(
   }
 }
 
+// PATCH toggle media status (draft ↔ published)
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const admin = verifyAdminToken(request);
+  if (!admin) {
+    return NextResponse.json({ success: false, error: 'অননুমোদিত' }, { status: 401 });
+  }
+
+  try {
+    await connectDB();
+    const media = await Media.findById(params.id);
+
+    if (!media) {
+      return NextResponse.json({ success: false, error: 'মিডিয়া পাওয়া যায়নি' }, { status: 404 });
+    }
+
+    const newStatus = media.status === 'published' ? 'draft' : 'published';
+    media.status = newStatus;
+    await media.save();
+
+    return NextResponse.json({ success: true, media });
+  } catch (error) {
+    console.error('Media status toggle error:', error);
+    return NextResponse.json({ success: false, error: 'স্ট্যাটাস পরিবর্তন করতে সমস্যা হয়েছে' }, { status: 500 });
+  }
+}
+
 // DELETE media
 export async function DELETE(
   request: NextRequest,
