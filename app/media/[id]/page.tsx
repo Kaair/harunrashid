@@ -144,6 +144,7 @@ export default function PostDetailPage() {
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
             />
             <div className="absolute top-4 right-4">
               <span className="bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
@@ -294,6 +295,7 @@ export default function PostDetailPage() {
                         alt={item.title}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-110"
+                        sizes="(max-width: 768px) 80vw, (max-width: 1024px) 50vw, 33vw"
                       />
                       <div className="absolute top-3 right-3">
                         <span className="bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-gray-900">

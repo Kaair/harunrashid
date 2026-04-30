@@ -157,6 +157,7 @@ export default function MediaPage() {
                     fill
                     className="object-cover"
                     priority={index === 0}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
                 <div className="p-5">
